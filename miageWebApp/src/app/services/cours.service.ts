@@ -9,7 +9,7 @@ export class CoursService {
 
   constructor() { }
 
-  getCours(): Cours[]{
+  getCours(): Cours[] {
     // retournes l'ensemble des cours
     const listClasses = [];
     rawClasses.forEach(c => {
@@ -18,4 +18,10 @@ export class CoursService {
     });
     return listClasses;
   }
+
+  deleteAllClasses(): Cours[] {
+    const emptyList = [];
+    return emptyList;
+  }
+
 }

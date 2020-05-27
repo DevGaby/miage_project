@@ -1,0 +1,39 @@
+<div class="container-fluid p-0">
+    <div class="card-body">
+        <h3 class="text-center">Administrer les cours</h3>
+        <table id="classTab" class="table table-dark">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">#</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Période</th>
+                <th scope="col">Nombre d'heures</th>
+                <th scope="col">Prof</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>           
+                <tr *ngFor="let c of myClasses">
+                    <td > </td>
+                    <td > {{ c?.label }} </td>
+                    <td > {{ c?.period }} </td>
+                    <td > {{ c?.nbHour?.valeur }} {{ c?.nbHour?.unity }} </td>
+                    <td > {{ c?.teacher }} </td>
+                    <td > {{ c?.detail }} </td> 
+                    <td > <button type="button" class="btn btn-danger text-uppercase text-center"> supprimer </button> </td> 
+                </tr>
+            </tbody>
+          </table>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col">
+                    <button type="button" id="deleteAllBtn" (click)="deleteAll()"
+                            class="btn-delete btn-outline-danger btn-lg btn-block text-uppercase text-center"> 
+                        tous suppimer 
+                    </button>
+                  </div>
+              </div> 
+          </div>
+    </div>
+</div>
