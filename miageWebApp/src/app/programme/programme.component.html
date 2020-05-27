@@ -1,0 +1,20 @@
+<div class="container-fluid p-0 m-0">
+    <div class="card-body p-2">
+        <div class="title"> 
+            <h2 class="card-title text-center">Mes cours</h2> 
+        </div>  
+        <div class="row">
+        <div class="col d-flex align-items-center">
+            <div *ngFor="let c of myClasses" class="card m-3">
+                <img src="../../assets/lesson.png" class="card-img card-img-top" alt="teacher icon">
+                <div class="p-0">
+                    <h3 class="card-title text-center text-danger">{{ c?.label }}</h3>
+                    <h6 class="card-title px-3"><b> {{ c?.period }} </b></h6>
+                    <p class="card-text px-3">Description :{{ c?.detail }}</p>
+                    <div class="card-secondary bg-light px-3" style="height: 50px; line-height: 50px;"> Prof : {{ c?.teacher }}</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
