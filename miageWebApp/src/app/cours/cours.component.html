@@ -15,13 +15,13 @@
             </thead>
             <tbody>           
                 <tr *ngFor="let c of myClasses">
-                    <td > </td>
+                    <td > {{ c?.id }} </td>
                     <td > {{ c?.label }} </td>
                     <td > {{ c?.period }} </td>
                     <td > {{ c?.nbHour?.valeur }} {{ c?.nbHour?.unity }} </td>
                     <td > {{ c?.teacher }} </td>
                     <td > {{ c?.detail }} </td> 
-                    <td > <button type="button" class="btn btn-danger text-uppercase text-center"> supprimer </button> </td> 
+                    <td > <button type="button" class="btn btn-danger text-uppercase text-center" (click)="deleteClass(c.id)"> supprimer </button> </td> 
                 </tr>
             </tbody>
           </table>

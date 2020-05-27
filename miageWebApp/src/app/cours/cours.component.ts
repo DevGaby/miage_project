@@ -23,5 +23,10 @@ export class CoursComponent implements OnInit {
     this.myClasses = this.coursService.deleteAllClasses();
   }
 
+  deleteClass(id: number): void {
+    const currentClasses = this.myClasses.slice(0, this.myClasses.length);
+    this.myClasses = this.coursService.deleteClass(currentClasses, id);
+  }
+
 
 }
