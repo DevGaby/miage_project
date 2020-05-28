@@ -7,7 +7,7 @@
                     <div class="col-10 py-2"> {{ prof?.statut}} </div>
                     <div class="content_img col-2 py-2 px-0">
                         <div class="overlay">
-                            <img src="assets/red_bin.png" alt="bin-icon" (click)="deleteProf(prof.id)" />
+                            <img src="assets/red_bin.png" alt="bin-icon" />
                         </div>
                     </div>
                 </div>
@@ -19,3 +19,13 @@
         </div>
     </div>
 </div>
+<div class="container-fluid p-0 bg-white">
+    <div class="row p-2">
+        <div class="col">
+            <button type="button" class="btn btn-outline-danger btn-lg btn-block text-uppercase text-center" 
+                    id="deleteBtn" (click)="deleteProfs()">
+                        supprimer tous les profs
+            </button>
+        </div>
+    </div> 
+</div>              

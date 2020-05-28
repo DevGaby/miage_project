@@ -9,8 +9,13 @@ export class ProfService {
 
   constructor() { }
 
-  getProfs(): Professeur[]{
+  getProfs(): Professeur[] {
     rawProfs.map(p => new Professeur(p.id, p.lastname, p.firstname, p.statut, p.description));
     return rawProfs;
+  }
+
+  deleteProfs(): Professeur[] {
+    const emptyList = [];
+    return emptyList;
   }
 }

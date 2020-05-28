@@ -16,7 +16,9 @@ export class ProfComponent implements OnInit {
     this.myProfs = this.profService.getProfs();
   }
 
-
+  deleteProfs(): void {
+    this.myProfs = this.profService.deleteProfs();
+  }
 
 
 
