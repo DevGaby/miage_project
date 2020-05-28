@@ -8,6 +8,7 @@
 }
 
 .btn-delete{
+    color:#d9534f ;
     background-color:transparent;
 }
 
@@ -18,4 +19,9 @@
 .btn-initialize:hover{
     color: #5cb85c ;
     background-color : transparent;
+}
+
+.btn-delete:hover{
+    color: #f7f7f7;
+    background-color : #d9534f;
 }
