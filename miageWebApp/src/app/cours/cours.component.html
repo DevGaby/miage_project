@@ -1,19 +1,43 @@
 <div class="container-fluid p-0">
     <div class="card-body">
         <h3 class="text-center">Administrer les cours</h3>
-        <table id="classTab" class="table table-dark">
-            <thead>
-              <tr class="text-center">
-                <th scope="col">#</th>
-                <th scope="col">Intitulé</th>
-                <th scope="col">Période</th>
-                <th scope="col">Nombre d'heures</th>
-                <th scope="col">Prof</th>
-                <th scope="col">Description</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>           
+        <form [formGroup]="addClassForm" (ngSubmit)="onSubmit(addClassForm.value)">
+            <table id="classTab" class="table table-dark">
+                <thead>
+                    <tr class="text-center">
+                    <th scope="col">Id</th>
+                    <th scope="col">Intitulé</th>
+                    <th scope="col">Période</th>
+                    <th scope="col">Nombre d'heures</th>
+                    <th scope="col">Prof</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                <tr>
+                
+                    <td> # </td>
+                    <td> 
+                        <input type="text" class="form-control" id="titleInput" formControlName="titleInput" placeholder="Intitulé">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="periodInput" formControlName="periodInput" placeholder="Période">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="nbHourInput" formControlName="nbHourInput" placeholder="Nombre d'heure">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="teacherInput" formControlName="teacherInput" placeholder="Prof">
+                    </td>
+                    <td>
+                        <textarea class="form-control" id="descriptionInput" formControlName="descriptionInput" rows="3" cols="25"></textarea>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success text-uppercase text-center"> ajouter </button>
+                    </td>
+                
+              </tr>         
                 <tr *ngFor="let c of myClasses">
                     <td > {{ c?.id }} </td>
                     <td > {{ c?.label }} </td>
@@ -23,8 +47,9 @@
                     <td > {{ c?.detail }} </td> 
                     <td > <button type="button" class="btn btn-danger text-uppercase text-center" (click)="deleteClass(c.id)"> supprimer </button> </td> 
                 </tr>
-            </tbody>
-          </table>
+                </tbody>
+            </table>
+        </form>
           <div class="card-body">
               <div class="row">
                   <div class="col">
