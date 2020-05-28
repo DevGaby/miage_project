@@ -6,3 +6,16 @@
     padding: 0;
     margin: 0;
 }
+
+.btn-delete{
+    background-color:transparent;
+}
+
+#reInitBtn{
+    display: none;
+}
+
+.btn-initialize:hover{
+    color: #5cb85c ;
+    background-color : transparent;
+}

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Cours } from '../model/cours';
 import { CoursService } from '../services/cours.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-cours',
@@ -30,19 +31,21 @@ export class CoursComponent implements OnInit {
 
   deleteAll(): void {
     this.myClasses = this.coursService.deleteAllClasses();
+    this.showReInitButton();
   }
 
   deleteClass(id: number): void {
     const currentClasses = this.myClasses.slice(0, this.myClasses.length);
     this.myClasses = this.coursService.deleteClass(currentClasses, id);
+    this.showReInitButton();
   }
 
   onSubmit(newClasse: any): void {
-    const title = (<HTMLInputElement>document.getElementById('titleInput')).value;
-    const period = (<HTMLInputElement>document.getElementById('periodInput')).value;
-    const nbHour = (<HTMLInputElement>document.getElementById('nbHourInput')).value;
-    const teacher = (<HTMLInputElement>document.getElementById('teacherInput')).value;
-    const description = (<HTMLInputElement>document.getElementById('descriptionInput')).value;
+    const title = (document.getElementById('titleInput') as HTMLInputElement).value;
+    const period = (document.getElementById('periodInput') as HTMLInputElement).value;
+    const nbHour = (document.getElementById('nbHourInput') as HTMLInputElement).value;
+    const teacher = (document.getElementById('teacherInput') as HTMLInputElement).value;
+    const description = (document.getElementById('descriptionInput') as HTMLInputElement).value;
 
     if (!title || !period || !teacher || !description || !Number.isInteger(+nbHour)) {
         alert('Vous n\'avez pas remplis tous les champs');
@@ -50,6 +53,23 @@ export class CoursComponent implements OnInit {
     }
     const currentClasses = this.myClasses.slice(0, this.myClasses.length);
     this.myClasses = this.coursService.postClasse(currentClasses, newClasse);
+    this.clearInput(['titleInput', 'periodInput', 'nbHourInput', 'teacherInput', 'descriptionInput']);
   }
+
+  clearInput(list){
+    for (let i = 0; i < list.length; i++) {
+      (document.getElementById(list[i])as HTMLInputElement).value = '';
+    }
+}
+
+  reInitBtn(): void {
+    this.deleteAll();
+    this.ngOnInit();
+    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'none';
+  }
+
+  showReInitButton() {
+    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'initial';
+}
 
 }

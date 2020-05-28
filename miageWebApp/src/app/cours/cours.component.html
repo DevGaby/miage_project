@@ -51,13 +51,17 @@
             </table>
         </form>
           <div class="card-body">
-              <div class="row">
+              <div class="row bg-white">
                   <div class="col">
                     <button type="button" id="deleteAllBtn" (click)="deleteAll()"
                             class="btn-delete btn-outline-danger btn-lg btn-block text-uppercase text-center"> 
                         tous suppimer 
                     </button>
                   </div>
+                  <div id="reInitBtn" class="col">
+                    <button type="button" class="btn-initialize btn-success btn-lg btn-block text-uppercase text-center " 
+                         (click)="reInitBtn()"> réinitialiser le tableau  
+                    </button> 
               </div> 
           </div>
     </div>
