@@ -18,4 +18,17 @@ export class ProfService {
     const emptyList = [];
     return emptyList;
   }
+
+  deleteProfId(oldList: Professeur[], id: number): Professeur[] {
+    const idClass = oldList.findIndex(c => c.id === id);
+    const newList = [];
+    oldList.forEach((c, index) => {
+      if (idClass !== index) {
+        const prof: Professeur = new Professeur(c.id, c.lastname, c.firstname, c.statut, c.description);
+        newList.push(prof);
+      }
+    });
+    return newList;
+  }
+
 }

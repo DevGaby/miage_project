@@ -20,6 +20,11 @@ export class ProfComponent implements OnInit {
     this.myProfs = this.profService.deleteProfs();
   }
 
+  deleteProf(profId: number): void {
+    const currentList = this.myProfs.slice(0, this.myProfs.length);
+    this.myProfs = this.profService.deleteProfId(currentList, profId);
+  }
+
 
 
 }
