@@ -29,11 +29,14 @@ export class ProfComponent implements OnInit {
 
   deleteProfs(): void {
     this.myProfs = this.profService.deleteProfs();
+    this.showReInitButton();
+    (document.getElementById('deleteBtn') as HTMLInputElement).style.display = 'none';
   }
 
   deleteProf(profId: number): void {
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     this.myProfs = this.profService.deleteProfId(currentList, profId);
+    this.showReInitButton();
   }
 
   onSubmit(newTeacher: NgForm): string {
@@ -49,6 +52,24 @@ export class ProfComponent implements OnInit {
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     this.myProfs = this.profService.postTeacher(currentList, newTeacher);
     this.teacherForm.reset();
+  }
+
+  showReInitButton() {
+    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'initial';
+  }
+
+  reInitList(): void {
+    const currentList = this.myProfs.slice(0, this.myProfs.length);
+    currentList.map(c => new Professeur(c.id, c.firstname, c.lastname, c.statut, c.description));
+    const newList = this.profService.getProfs();
+    if (currentList.length > 0) {
+       currentList.forEach(prof => {
+      newList.push(prof);
+    });
+    }
+    this.myProfs = newList;
+    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'none';
+    (document.getElementById('deleteBtn') as HTMLInputElement).style.display = 'initial';
   }
 
 
