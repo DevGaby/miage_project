@@ -8,6 +8,8 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ProgrammeComponent } from './programme/programme.component';
 import { CoursComponent } from './cours/cours.component';
 import { ProfComponent } from './prof/prof.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { ProfComponent } from './prof/prof.component';
     ProgrammeComponent,
     CoursComponent,
     ProfComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
