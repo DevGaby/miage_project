@@ -19,3 +19,7 @@
   .content_img:hover .overlay {
     opacity: 1;
   }
+
+  .modal.show{
+    display: block;
+  }

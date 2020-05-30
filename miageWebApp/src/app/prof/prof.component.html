@@ -27,5 +27,51 @@
                         supprimer tous les profs
             </button>
         </div>
+        <div class="col">
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block text-uppercase text-center" 
+                    id="modalBtn" (click)="showModal = true">
+                        ajouter un professeur
+            </button>
+        </div>
     </div> 
-</div>              
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" [ngClass]="{'show' :  showModal}">
+  <div class="modal-dialog">
+    <form [formGroup]="teacherForm" (ngSubmit)="onSubmit(teacherForm.value)">
+    <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-uppercase text-center p-2"> nouveau professeur </h3>
+        </div>   
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" name="lastname" id="lastname" placeholder="Nom" formControlName="lastname"> </div>
+                    <div class="col"> <input type="text" name="firstname" id="firstname" placeholder="Prénom" formControlName="firstname"> </div>
+                </div>
+                <div class="row">
+                    <div class="col">  
+                        <label for="state"> Statut :</label>
+                        <select name="state" id="state" formControlName="state">
+                            <option value="INTERNE">INTERNE</option>
+                            <option value="EXTERNE">EXTERNE</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="row px-3">
+                    <label for="description"> Description :</label>
+                    <textarea class="form-control" id="description" formControlName="description" rows="3" cols="25"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="showModal = false" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div> 
+        </div>
+    </form>
+    </div>
+</div>
+
+

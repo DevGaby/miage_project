@@ -9,13 +9,14 @@ import { ProgrammeComponent } from './programme/programme.component';
 import { CoursComponent } from './cours/cours.component';
 import { ProfComponent } from './prof/prof.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     ProgrammeComponent,
     CoursComponent,
-    ProfComponent
+    ProfComponent,
   ],
   imports: [
     BrowserModule,

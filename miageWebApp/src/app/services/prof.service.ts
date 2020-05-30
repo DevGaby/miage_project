@@ -31,4 +31,11 @@ export class ProfService {
     return newList;
   }
 
+  postTeacher(oldList: Professeur[], newTeacher: any): Professeur[] {
+    oldList.map(p => new Professeur(p.id, p.firstname, p.lastname, p.statut, p.description));
+    newTeacher = new Professeur((oldList.length + 1), newTeacher.firstname, newTeacher.lastname, newTeacher.state, newTeacher.description);
+    oldList.push(newTeacher);
+    return oldList;
+  }
+
 }
