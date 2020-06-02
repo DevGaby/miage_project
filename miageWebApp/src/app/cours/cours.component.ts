@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Cours } from '../model/cours';
 import { CoursService } from '../services/cours.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-cours',
@@ -14,19 +13,21 @@ import { ThrowStmt } from '@angular/compiler';
 export class CoursComponent implements OnInit {
   myClasses: Cours[] = [];
   addClassForm: FormGroup;
+  show: boolean;
 
   constructor(private coursService: CoursService, private formBuilder: FormBuilder) {
     this.addClassForm = this.formBuilder.group({
-      titleInput: '',
-      periodInput: '',
-      nbHourInput: '',
-      teacherInput: '',
-      descriptionInput: ''
+      label: '',
+      period: '',
+      nbHour: '',
+      teacher: '',
+      detail: ''
     });
   }
 
   ngOnInit() {
     this.myClasses = this.coursService.getCours();
+    this.show = false;
   }
 
   deleteAll(): void {
@@ -40,36 +41,37 @@ export class CoursComponent implements OnInit {
     this.showReInitButton();
   }
 
-  onSubmit(newClasse: any): void {
-    const title = (document.getElementById('titleInput') as HTMLInputElement).value;
-    const period = (document.getElementById('periodInput') as HTMLInputElement).value;
-    const nbHour = (document.getElementById('nbHourInput') as HTMLInputElement).value;
-    const teacher = (document.getElementById('teacherInput') as HTMLInputElement).value;
-    const description = (document.getElementById('descriptionInput') as HTMLInputElement).value;
+  onSubmit(newClasse: Cours): void {
+    const title = this.addClassForm.get('label').value;
+    const period = this.addClassForm.get('period').value;
+    const nbHour = this.addClassForm.get('nbHour').value;
+    const teacher = this.addClassForm.get('teacher').value;
+    const description = this.addClassForm.get('detail').value;
 
     if (!title || !period || !teacher || !description || !Number.isInteger(+nbHour)) {
         alert('Vous n\'avez pas remplis tous les champs');
         return;
     }
-    const currentClasses = this.myClasses.slice(0, this.myClasses.length);
-    this.myClasses = this.coursService.postClasse(currentClasses, newClasse);
-    this.clearInput(['titleInput', 'periodInput', 'nbHourInput', 'teacherInput', 'descriptionInput']);
+    //const currentClasses = this.myClasses.slice(0, this.myClasses.length);
+    //this.myClasses = this.coursService.postClasse(currentClasses, newClasse);
+    newClasse.id = this.myClasses.length +1;
+    this.myClasses.push(newClasse);
+    this.clearInput();
   }
 
-  clearInput(list){
-    for (let i = 0; i < list.length; i++) {
-      (document.getElementById(list[i])as HTMLInputElement).value = '';
-    }
-}
+  clearInput(): void {
+    this.addClassForm.reset();
+  }
 
   reInitBtn(): void {
     this.deleteAll();
-    this.ngOnInit();
+    this.myClasses = this.coursService.getCours();
     (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'none';
   }
 
   showReInitButton() {
     (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'initial';
-}
+  }
+
 
 }

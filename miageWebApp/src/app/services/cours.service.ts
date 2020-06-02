@@ -11,13 +11,6 @@ export class CoursService {
   constructor() { }
 
   getCours(): Cours[] {
-    // retournes l'ensemble des cours
-    // const listClasses = [];
-    // rawClasses.forEach(c =>
-    //   const classe: Cours = new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail);
-    //   listClasses.push(classe);
-    // });
-    // return listClasses;
     rawClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
     return rawClasses;
   }
@@ -46,7 +39,6 @@ export class CoursService {
     oldClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
     newClasses = new Cours((oldClasses.length + 1), newClasses.titleInput, newClasses.periodInput, hour, newClasses.teacherInput, newClasses.descriptionInput);
     oldClasses.push(newClasses);
-    console.log(oldClasses);
     // La méthode fonctionne mais ca me creer un tableau cours dans mon tableau Cous existant pkoi?
     return oldClasses;
   }

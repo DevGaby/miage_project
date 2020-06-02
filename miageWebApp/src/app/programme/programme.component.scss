@@ -4,17 +4,21 @@ img{
     height: 10rem;
 }
 
-.card-body{
-    background-color: #EC5E2A;
+.card-body, h3{
+    color: #EC5E2A;
 }
 
 .card{
-    width: 500px;
     padding: 0;
     margin: 0;
+    flex: wrap; 
 }
 
 .col{
     padding: 0;
     margin: 0;
+}
+
+.list{
+    background-color:#EC5E2A;   
 }

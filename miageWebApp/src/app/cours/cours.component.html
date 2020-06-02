@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container-fluid p-0">
     <div class="card-body">
         <h3 class="text-center">Administrer les cours</h3>
@@ -19,50 +20,52 @@
                 
                     <td> # </td>
                     <td> 
-                        <input type="text" class="form-control" id="titleInput" formControlName="titleInput" placeholder="Intitulé">
+                        <input type="text" class="form-control" id="label" formControlName="label" placeholder="Intitulé">
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="periodInput" formControlName="periodInput" placeholder="Période">
+                        <input type="text" class="form-control" id="period" formControlName="period" placeholder="Période">
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="nbHourInput" formControlName="nbHourInput" placeholder="Nombre d'heure">
+                        <input type="number" class="form-control" id="nbHour" formControlName="nbHour" placeholder="Nombre d'heure">
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="teacherInput" formControlName="teacherInput" placeholder="Prof">
+                        <input type="text" class="form-control" id="teacher" formControlName="teacher" placeholder="Prof">
                     </td>
                     <td>
-                        <textarea class="form-control" id="descriptionInput" formControlName="descriptionInput" rows="3" cols="25"></textarea>
+                        <textarea class="form-control" id="detail" formControlName="detail" rows="3" cols="25"></textarea>
                     </td>
                     <td>
                         <button type="submit" class="btn btn-success text-uppercase text-center"> ajouter </button>
                     </td>
                 
               </tr>         
-                <tr *ngFor="let c of myClasses">
-                    <td > {{ c?.id }} </td>
-                    <td > {{ c?.label }} </td>
-                    <td > {{ c?.period }} </td>
-                    <td > {{ c?.nbHour?.valeur }} {{ c?.nbHour?.unity }} </td>
-                    <td > {{ c?.teacher }} </td>
-                    <td > {{ c?.detail }} </td> 
-                    <td > <button type="button" class="btn btn-danger text-uppercase text-center" (click)="deleteClass(c.id)"> supprimer </button> </td> 
+                <tr *ngFor="let class of myClasses">
+                    <td > {{ class?.id }} </td>
+                    <td > {{ class?.label }} </td>
+                    <td > {{ class?.period }} </td>
+                    <td > {{ class?.nbHour?.valeur }} {{ class?.nbHour?.unity }} </td>
+                    <td > {{ class?.teacher }} </td>
+                    <td > {{ class?.detail }} </td> 
+                    <td > <button type="button" class="btn btn-danger text-uppercase text-center" (click)="deleteClass(class.id)"> supprimer </button> </td> 
                 </tr>
                 </tbody>
             </table>
         </form>
-          <div class="card-body">
-              <div class="row bg-white">
-                  <div class="col">
-                    <button type="button" id="deleteAllBtn" (click)="deleteAll()"
-                            class="btn-delete btn-outline-danger btn-lg btn-block text-uppercase text-center"> 
-                        tous suppimer 
-                    </button>
-                  </div>
-                  <div id="reInitBtn" class="col">
-                    <button type="button" class="btn-initialize btn-success btn-lg btn-block text-uppercase text-center " 
-                         (click)="reInitBtn()"> réinitialiser le tableau  
-                    </button> 
-              </div> 
-          </div>
+            <div class="card-body">
+                <div class="row bg-white">
+                    <div class="col">
+                        <button type="button" id="deleteAllBtn" (click)="deleteAll()"
+                                class="btn-delete btn-outline-danger btn-lg btn-block text-uppercase text-center"> 
+                            tous suppimer 
+                        </button>
+                    </div>
+                    <div id="reInitBtn" class="col">
+                        <button type="button" class="btn-initialize btn-success btn-lg btn-block text-uppercase text-center " 
+                            (click)="reInitBtn()"> réinitialiser le tableau  
+                        </button> 
+                    </div> 
+                </div>
+            </div>
     </div>
 </div>
+<app-footer></app-footer>
