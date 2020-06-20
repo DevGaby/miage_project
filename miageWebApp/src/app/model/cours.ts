@@ -1,19 +1,6 @@
 import { Unit } from '../model/unit';
 
-export class Cours {
-    id: number;
-    label: string;
-    period: string;
-    nbHour: Unit;
-    teacher: string;
-    detail: string;
-
-    constructor(id: number, label: string, period: string, nbHour: Unit, teacher: string, detail: string) {
-        this.id = id;
-        this.label = label;
-        this.period = period;
-        this.nbHour = nbHour;
-        this.teacher = teacher;
-        this.detail = detail;
-    }
+export class Cours { 
+    constructor(public id: number, public label: string, public period: string, 
+                public nbHour: Unit, public teacher: string, public detail: string) { } 
 }
