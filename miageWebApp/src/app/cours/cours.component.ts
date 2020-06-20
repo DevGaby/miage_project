@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Cours } from '../model/cours';
 import { CoursService } from '../services/cours.service';
+import { Unit } from '../model/unit';
 
 @Component({
   selector: 'app-cours',
@@ -52,10 +53,13 @@ export class CoursComponent implements OnInit {
         alert('Vous n\'avez pas remplis tous les champs');
         return;
     }
-    //const currentClasses = this.myClasses.slice(0, this.myClasses.length);
-    //this.myClasses = this.coursService.postClasse(currentClasses, newClasse);
-    newClasse.id = this.myClasses.length +1;
+
+    const newUnity = new Unit(nbHour,'heures');
+    newClasse.id = this.myClasses.length + 1;
+    newClasse.nbHour = newUnity;
     this.myClasses.push(newClasse);
+    this.myClasses = this.myClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
+    debugger;
     this.clearInput();
   }
 
