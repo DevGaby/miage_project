@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 
 import { Professeur } from '../model/prof';
 import { ProfService } from '../services/prof.service';
-
 
 @Component({
   selector: 'app-prof',
@@ -12,64 +10,53 @@ import { ProfService } from '../services/prof.service';
 })
 export class ProfComponent implements OnInit {
   myProfs: Professeur[] = [];
-  teacherForm: FormGroup;
+  showBtnInit: boolean;
+  showBtnDelete:boolean;
+  addActive: boolean;
 
-  constructor(private profService: ProfService, private formBuilder: FormBuilder) { 
-    this.teacherForm = this.formBuilder.group({
-      lastname: '',
-      firstname: '',
-      state: '',
-      description: ''
-    });
-  }
+  constructor(private profService: ProfService) { }
 
   ngOnInit(): void {
+    this.showBtnInit = false;
+    this.showBtnDelete = true;
+    this.addActive = false;
+    this.getProfs();
+  }
+
+  getProfs(): void{
     this.myProfs = this.profService.getProfs();
   }
 
   deleteProfs(): void {
     this.myProfs = this.profService.deleteProfs();
-    this.showReInitButton();
-    (document.getElementById('deleteBtn') as HTMLInputElement).style.display = 'none';
+    this.showBtnInit = true;
+    this.showBtnDelete = false;
   }
 
   deleteProf(profId: number): void {
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     this.myProfs = this.profService.deleteProfId(currentList, profId);
-    this.showReInitButton();
-  }
-
-  onSubmit(newTeacher: NgForm): string {
-    const lastname = this.teacherForm.get('lastname').value;
-    const firstname = this.teacherForm.get('firstname').value;
-    const state = this.teacherForm.get('state').value;
-    const description = this.teacherForm.get('description').value;
-
-    if (!lastname || !firstname || !state || !description) {
-      alert('Vous n\'avez pas remplis tous les champs');
-      return;
-    }
-    const currentList = this.myProfs.slice(0, this.myProfs.length);
-    this.myProfs = this.profService.postTeacher(currentList, newTeacher);
-    this.teacherForm.reset();
-  }
-
-  showReInitButton() {
-    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'initial';
+    this.showBtnInit = true;
   }
 
   reInitList(): void {
-    const currentList = this.myProfs.slice(0, this.myProfs.length);
+    const currentList = this.profService.getProfs();
+    currentList.slice(0, this.myProfs.length);
     currentList.map(c => new Professeur(c.id, c.firstname, c.lastname, c.statut, c.description));
-    const newList = this.profService.getProfs();
-    if (currentList.length > 0) {
-       currentList.forEach(prof => {
-      newList.push(prof);
-    });
-    }
-    this.myProfs = newList;
-    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'none';
-    (document.getElementById('deleteBtn') as HTMLInputElement).style.display = 'initial';
+    this.myProfs = currentList;
+    this.showBtnDelete = true;
+    this.showBtnInit = false;
+  }
+
+  addTeacher(){
+    this.addActive = true;
+  }
+
+  updateList(event){
+    const currentList = this.myProfs.slice(0, this.myProfs.length);
+    event.id = this.myProfs.length + 1;
+    currentList.push(event);
+    this.myProfs = currentList.map(p => new Professeur(p.id, p.firstname, p.lastname, p.statut, p.description));
   }
 
 

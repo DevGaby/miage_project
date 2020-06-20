@@ -10,6 +10,7 @@ import { CoursComponent } from './cours/cours.component';
 import { ProfComponent } from './prof/prof.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
     ProfComponent,
     HeaderComponent,
     FooterComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

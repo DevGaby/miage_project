@@ -1,0 +1,35 @@
+
+<div *ngIf="showModal" class="modal-dialog modal-dialog-centered">
+    <form [formGroup]="teacherForm" (ngSubmit)="onSubmit(teacherForm.value)">
+        <div class="modal-content">
+            <div class="modal-header text-center text-uppercase "> nouveau professeur </div>   
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                    <input type="text" name="lastname" id="lastname" placeholder="Nom" formControlName="lastname">
+                    </div>
+                    <div class="col"> 
+                    <input type="text" name="firstname" id="firstname" placeholder="Prénom" formControlName="firstname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col py-2">  
+                        <label for="state"> Statut : </label>
+                        <select name="state" id="statut" formControlName="statut">
+                            <option value="INTERNE">INTERNE</option>
+                            <option value="EXTERNE">EXTERNE</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="row px-3">
+                    <label for="description"> Description :</label>
+                    <textarea class="form-control" id="description" formControlName="description" rows="3" cols="25"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="showModal = false" >Annuler</button>
+                <button type="submit" class="btn btn-success" >Valider</button>
+            </div> 
+        </div>
+    </form>
+</div>
