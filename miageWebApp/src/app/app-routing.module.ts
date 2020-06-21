@@ -10,8 +10,8 @@ import { ModalComponent } from './modal/modal.component';
 const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'cours', component: CoursComponent },
-  { path: 'programmes', component: ProgrammeComponent },
-  { path: 'professeurs', component: ProfComponent },
+  { path: 'programme', component: ProgrammeComponent },
+  { path: 'professeur', component: ProfComponent },
   { path: 'modal', component: ModalComponent}
 ];
 

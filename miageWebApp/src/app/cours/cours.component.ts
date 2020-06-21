@@ -13,11 +13,11 @@ import { Unit } from '../model/unit';
 
 export class CoursComponent implements OnInit {
   myClasses: Cours[] = [];
-  addClassForm: FormGroup;
-  show: boolean;
+  classForm: FormGroup;
+  //showBtnInit: boolean;
 
   constructor(private coursService: CoursService, private formBuilder: FormBuilder) {
-    this.addClassForm = this.formBuilder.group({
+    this.classForm = this.formBuilder.group({
       label: '',
       period: '',
       nbHour: '',
@@ -28,54 +28,44 @@ export class CoursComponent implements OnInit {
 
   ngOnInit() {
     this.myClasses = this.coursService.getCours();
-    this.show = false;
   }
 
   deleteAll(): void {
-    this.myClasses = this.coursService.deleteAllClasses();
-    this.showReInitButton();
+    //this.myClasses = this.coursService.deleteAllClasses();
+    this.myClasses = [];
   }
 
   deleteClass(id: number): void {
     const currentClasses = this.myClasses.slice(0, this.myClasses.length);
     this.myClasses = this.coursService.deleteClass(currentClasses, id);
-    this.showReInitButton();
   }
 
-  onSubmit(newClasse: Cours): void {
-    const title = this.addClassForm.get('label').value;
-    const period = this.addClassForm.get('period').value;
-    const nbHour = this.addClassForm.get('nbHour').value;
-    const teacher = this.addClassForm.get('teacher').value;
-    const description = this.addClassForm.get('detail').value;
+  onSubmit(): void {
+    const title = this.classForm.get('label').value;
+    const period = this.classForm.get('period').value;
+    const nbHour = this.classForm.get('nbHour').value;
+    const teacher = this.classForm.get('teacher').value;
+    const description = this.classForm.get('detail').value;
 
     if (!title || !period || !teacher || !description || !Number.isInteger(+nbHour)) {
         alert('Vous n\'avez pas remplis tous les champs');
         return;
     }
-
+    const form = this.classForm.value;
     const newUnity = new Unit(nbHour,'heures');
-    newClasse.id = this.myClasses.length + 1;
-    newClasse.nbHour = newUnity;
-    this.myClasses.push(newClasse);
+    form.id = this.myClasses.length + 1;
+    form.nbHour = newUnity;
+    this.myClasses.push(form);
     this.myClasses = this.myClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
-    debugger;
     this.clearInput();
   }
 
   clearInput(): void {
-    this.addClassForm.reset();
+    this.classForm.reset();
   }
 
   reInitBtn(): void {
     this.deleteAll();
     this.myClasses = this.coursService.getCours();
-    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'none';
   }
-
-  showReInitButton() {
-    (document.getElementById('reInitBtn') as HTMLInputElement).style.display = 'initial';
-  }
-
-
 }

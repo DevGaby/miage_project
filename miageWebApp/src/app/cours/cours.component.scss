@@ -12,10 +12,6 @@
     background-color:transparent;
 }
 
-#reInitBtn{
-    display: none;
-}
-
 .btn-initialize:hover{
     color: #5cb85c ;
     background-color : transparent;
@@ -29,3 +25,11 @@
 .container-fluid {
     min-height: 100vh;
   }
+
+  .btn_visible{
+      display: initial;
+  }
+
+  .btn_invisible{
+    display: none;
+}

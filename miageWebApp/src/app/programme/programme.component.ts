@@ -10,10 +10,10 @@ import { Cours } from '../model/cours';
 export class ProgrammeComponent implements OnInit {
   myClasses: Cours[] = [];
 
-  constructor(private rest: CoursService) { }
+  constructor(private coursService: CoursService) { }
 
   ngOnInit(): void {
-    this.myClasses = this.rest.getCours();
+    this.myClasses = this.coursService.getCours();
   }
 
 }
