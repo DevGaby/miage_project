@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,9 +8,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ModalComponent implements OnInit {
   teacherForm: FormGroup;
-  showModal: boolean;
+  //showModal: boolean;
   @Output() teacher: EventEmitter<any> = new EventEmitter;
-  
+  @Input('showModal') public addActive;
+
   constructor(private formBuilder: FormBuilder) { 
     this.teacherForm = this.formBuilder.group({
       lastname: '',
@@ -21,7 +22,6 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showModal = true;
   }
 
   onSubmit(): void {
@@ -38,7 +38,6 @@ export class ModalComponent implements OnInit {
     const form = this.teacherForm.value;
     this.teacher.emit(form);
     this.teacherForm.reset();
-    this.showModal = false;
   }
 
 }

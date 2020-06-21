@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Professeur } from '../model/prof';
 import { ProfService } from '../services/prof.service';
@@ -12,14 +12,14 @@ export class ProfComponent implements OnInit {
   myProfs: Professeur[] = [];
   showBtnInit: boolean;
   showBtnDelete:boolean;
+  
+  //test @Input
   addActive: boolean;
-
   constructor(private profService: ProfService) { }
 
   ngOnInit(): void {
     this.showBtnInit = false;
     this.showBtnDelete = true;
-    this.addActive = false;
     this.getProfs();
   }
 
@@ -57,7 +57,6 @@ export class ProfComponent implements OnInit {
     event.id = this.myProfs.length + 1;
     currentList.push(event);
     this.myProfs = currentList.map(p => new Professeur(p.id, p.firstname, p.lastname, p.statut, p.description));
+    this.addActive = false;
   }
-
-
 }

@@ -43,8 +43,7 @@
 </div>
 
 <div>
-    <app-modal *ngIf="addActive" (teacher)="updateList($event)" ></app-modal>
+    <app-modal [showModal]="addActive" (teacher)="updateList($event)" ></app-modal>
 </div>
-
 
 <app-footer></app-footer>
