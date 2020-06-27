@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Cours } from '../model/cours';
 import { CoursService } from '../services/cours.service';
@@ -14,15 +14,14 @@ import { Unit } from '../model/unit';
 export class CoursComponent implements OnInit {
   myClasses: Cours[] = [];
   classForm: FormGroup;
-  //showBtnInit: boolean;
 
   constructor(private coursService: CoursService, private formBuilder: FormBuilder) {
     this.classForm = this.formBuilder.group({
-      label: '',
-      period: '',
-      nbHour: '',
-      teacher: '',
-      detail: ''
+      label: ['', Validators.required],
+      period: ['', Validators.required],
+      nbHour: ['',Validators.required],
+      teacher: ['', Validators.required],
+      detail: ['', Validators.required]
     });
   }
 
@@ -36,27 +35,22 @@ export class CoursComponent implements OnInit {
   }
 
   deleteClass(id: number): void {
-    const currentClasses = this.myClasses.slice(0, this.myClasses.length);
-    this.myClasses = this.coursService.deleteClass(currentClasses, id);
+      const currentClasses = this.myClasses.slice(0, this.myClasses.length);
+      this.myClasses = this.coursService.deleteClassById(currentClasses, id);
   }
 
   onSubmit(): void {
-    const title = this.classForm.get('label').value;
-    const period = this.classForm.get('period').value;
-    const nbHour = this.classForm.get('nbHour').value;
-    const teacher = this.classForm.get('teacher').value;
-    const description = this.classForm.get('detail').value;
-
-    if (!title || !period || !teacher || !description || !Number.isInteger(+nbHour)) {
-        alert('Vous n\'avez pas remplis tous les champs');
-        return;
+    if (this.classForm.invalid) {
+      alert('Vous n\'avez pas remplis tous les champs');
+      return;
     }
+ 
     const form = this.classForm.value;
-    const newUnity = new Unit(nbHour,'heures');
+    const newUnity = new Unit(form.nbHour,'heures');
     form.id = this.myClasses.length + 1;
     form.nbHour = newUnity;
-    this.myClasses.push(form);
-    this.myClasses = this.myClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
+    let newCours = new Cours(form.id, form.label, form.period, form.nbHour, form.teacher, form.detail);
+    this.myClasses.push(newCours);
     this.clearInput();
   }
 

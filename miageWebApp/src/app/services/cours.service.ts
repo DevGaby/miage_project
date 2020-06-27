@@ -11,27 +11,25 @@ export class CoursService {
   constructor() { }
 
   getCours(): Cours[] {
-    rawClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
-    return rawClasses;
+    return rawClasses.map(c => new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail));
   }
 
   deleteAllClasses(): Cours[] {
-    const emptyList = [];
-    return emptyList;
+    return [];
   }
 
-  deleteClass(oldClasses: Cours[], id: number): Cours[] {
+  deleteClassById(oldClasses: Cours[], id: number): Cours[] {
     const idClass = oldClasses.findIndex(c => c.id === id);
-    const newList = [];
-    oldClasses.forEach((c, index) => {
-      if (idClass !== index) {
-        const classe: Cours = new Cours(c.id, c.label, c.period, c.nbHour, c.teacher, c.detail);
-        newList.push(classe);
-      }
-    });
-    // J'ai voulu utiliser splice comme suit mais ca n'a pas marcher
-    // oldClasses.splice(idClass, 0);
-    return newList;
+    if(idClass !== -1){
+      oldClasses.splice(idClass, 1);
+      return oldClasses; 
+      /*J'ai décomposé : Qd je fais directement return oldClasses.splice(idClass, 1);
+      Cela me renvoie un tableau avec uniquement lélement que je veux supprimer
+      */
+    }else{
+      console.log('error id');
+    }
+  
   }
 
   postClasse(oldClasses: Cours[], newClasses: any): Cours[] {
