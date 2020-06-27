@@ -10,9 +10,7 @@ import { ProfService } from '../services/prof.service';
 })
 export class ProfComponent implements OnInit {
   myProfs: Professeur[] = [];
-  showBtnDelete:boolean = true;
   sizeMyProfsInitial: number;
-  
   isModalDisplayed: boolean;
   constructor(private profService: ProfService) { }
 
@@ -27,7 +25,6 @@ export class ProfComponent implements OnInit {
 
   deleteProfs(): void {
     this.myProfs = this.profService.deleteProfs();
-    this.showBtnDelete = false;
   }
 
   deleteProf(profId: number): void {
@@ -40,19 +37,22 @@ export class ProfComponent implements OnInit {
     currentList.slice(0, this.myProfs.length);
     currentList.map(c => new Professeur(c.id, c.firstname, c.lastname, c.statut, c.description));
     this.myProfs = currentList;
-    this.showBtnDelete = true;
   }
 
   addTeacher(){
     this.isModalDisplayed = true;
   }
 
-  updateList(event){
+  updateList(event: Professeur): void{
     let newTeacher = new Professeur(event.id, event.firstname, event.lastname, event.statut, event.description);
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     event.id = this.myProfs.length + 1;
     currentList.push(newTeacher);
     this.myProfs = currentList.slice(0, currentList.length);
     this.isModalDisplayed = false;
+  }
+
+  closeModal(event : boolean): void{
+    this.isModalDisplayed = event;
   }
 }

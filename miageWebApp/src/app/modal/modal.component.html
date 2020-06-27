@@ -1,6 +1,6 @@
-<div *ngIf="addActive" class="myModal" aria-hidden="true" role="dialog">
+<div *ngIf="isModalDisplayed" class="myModal" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
-        <form [formGroup]="teacherForm" (ngSubmit)="onSubmit(teacherForm.value)">
+        <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
             <div class="modal-content">
                 <div class="modal-header text-center text-uppercase "> nouveau professeur </div>   
                 <div class="modal-body">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" (click)="addActive = false" >Annuler</button>
+                    <button type="button" class="btn btn-danger" (click)="closeModal()"> Annuler </button>
                     <button type="submit" class="btn btn-success" >Valider</button>
                 </div> 
             </div>

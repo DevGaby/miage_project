@@ -21,9 +21,9 @@
     </div>
     <div class="p-0 bg-white">
         <div class="row p-2">
-            <div class="col">
+            <div class="col" [ngClass]="{'btn_visible' : myProfs.length > 0, 'btn_invisible': myProfs.length === 0}">
                 <button type="button" class="btn btn-outline-danger btn-lg btn-block text-uppercase text-center" 
-                        [ngStyle]="{'display': showBtnDelete === true ? 'initial': 'none'}" id="deleteBtn" (click)="deleteProfs()">
+                        id="deleteBtn" (click)="deleteProfs()">
                         supprimer tous les profs
                 </button>
             </div>
@@ -48,5 +48,5 @@
 </div>
 
 <aside >
-    <app-modal [showModal]="isModalDisplayed" (teacher)="updateList($event)" ></app-modal>
+    <app-modal [showModal]="isModalDisplayed" (teacherEventEmitter)="updateList($event)" (modalEventEmitter)="closeModal($event)" ></app-modal>
 </aside>

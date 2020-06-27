@@ -9,8 +9,9 @@ import { Professeur } from '../model/prof';
 })
 export class ModalComponent implements OnInit {
   teacherForm: FormGroup;
-  @Output() teacher: EventEmitter<Professeur> = new EventEmitter;
-  @Input('showModal') public addActive;
+  @Output() teacherEventEmitter: EventEmitter<Professeur> = new EventEmitter;
+  @Output() modalEventEmitter: EventEmitter<boolean> = new EventEmitter;
+  @Input('showModal') public isModalDisplayed;
 
   constructor(private formBuilder: FormBuilder) { 
     this.teacherForm = this.formBuilder.group({
@@ -21,17 +22,22 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void{
+    console.log(this.isModalDisplayed);
   }
 
-  onSubmit(): void {
+  onSubmit(): void{
     const form = this.teacherForm.value;
     if (!form ||!form.lastname || !form.firstname || !form.statut || !form.description) {
       alert('Vous n\'avez pas remplis tous les champs');
       return;
     }
-    this.teacher.emit(form);
+    this.teacherEventEmitter.emit(form);
     this.teacherForm.reset();
+  }
+
+  closeModal(){
+   this.modalEventEmitter.emit(false);
   }
 
 }
