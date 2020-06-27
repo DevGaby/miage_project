@@ -16,15 +16,23 @@
   background-color: #f7f7f7;
 }
 
-.content_img:hover .overlay {
-  opacity: 1;
-}
-
-  #reInitBtn{
-    display: none;
-}
+// .content_img:hover .overlay {
+//   opacity: 1;
+// }
 
 .btn-initialize:hover{
     color: #5cb85c ;
     background-color : transparent;
+}
+
+.btn_visible{
+  display: initial;
+}
+
+.btn_invisible{
+  display: none;
+}
+
+.card:hover .overlay{
+   opacity: 1;
 }
