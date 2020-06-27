@@ -26,7 +26,7 @@ export class CoursService {
       /*J'ai décomposé : Qd je fais directement return oldClasses.splice(idClass, 1);
       Cela me renvoie un tableau avec uniquement lélement que je veux supprimer
       */
-    }else{
+    }else {
       console.log('error id');
     }
   

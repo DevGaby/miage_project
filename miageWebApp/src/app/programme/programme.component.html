@@ -1,24 +1,22 @@
-<app-header></app-header>
-
 <div class="container-fluid p-0">
     <div class="list"> 
-        <div class="row p-2">
+        <div class="row justify-content-center p-2">
             <h2 class="text-center text-uppercase">Mes cours</h2>
         </div>
         <div class="row">
-            <div *ngFor='let c of myClasses' class="col-md-4">
+            <div *ngFor='let class of myClasses' class="col-md-4">
                 <div class="card border-secondary m-5" style="width: 18rem;">
                     <div class="card-body text-dark">
                         <img src="/assets/lesson.png" class="card-img card-img-top" alt="teacher icon">
-                        <h3 class="card-title text-center text-danger">{{ c?.label }}</h3>
-                        <h6 class="card-title px-3"><b> {{ c?.period }} </b></h6>
-                        <p class="card-text px-3">Description :{{ c?.detail }}</p>
-                        <div class="card-secondary bg-light" style="height: 50px; line-height: 50px;"> Prof : {{ c?.teacher }}</div>
+                        <h3 class="card-title text-center text-danger">{{ class?.label }}</h3>
+                        <h6 class="card-title px-3"><b> {{ class?.period }} </b></h6>
+                        <p class="card-text px-3">Description :{{ class?.detail }}</p>
+                        <div class="card-secondary bg-light" style="height: 50px; line-height: 50px;">
+                             Prof : {{ class?.teacher }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>  
 </div>
-
-<app-footer></app-footer>

@@ -10,7 +10,6 @@ import { ProfService } from '../services/prof.service';
 })
 export class ProfComponent implements OnInit {
   myProfs: Professeur[] = [];
-  //showBtnInit: boolean = false;
   showBtnDelete:boolean = true;
   sizeMyProfsInitial: number;
   
@@ -28,14 +27,12 @@ export class ProfComponent implements OnInit {
 
   deleteProfs(): void {
     this.myProfs = this.profService.deleteProfs();
-    //this.showBtnInit = true;
     this.showBtnDelete = false;
   }
 
   deleteProf(profId: number): void {
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     this.myProfs = this.profService.deleteProfById(currentList, profId);
-   // this.showBtnInit = true;
   }
 
   reInitList(): void {
@@ -44,7 +41,6 @@ export class ProfComponent implements OnInit {
     currentList.map(c => new Professeur(c.id, c.firstname, c.lastname, c.statut, c.description));
     this.myProfs = currentList;
     this.showBtnDelete = true;
-    //this.showBtnInit = false;
   }
 
   addTeacher(){

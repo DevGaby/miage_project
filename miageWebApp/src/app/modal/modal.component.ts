@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Professeur } from '../model/prof';
 
 @Component({
   selector: 'app-modal',
@@ -8,8 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ModalComponent implements OnInit {
   teacherForm: FormGroup;
-  //showModal: boolean;
-  @Output() teacher: EventEmitter<any> = new EventEmitter;
+  @Output() teacher: EventEmitter<Professeur> = new EventEmitter;
   @Input('showModal') public addActive;
 
   constructor(private formBuilder: FormBuilder) { 
@@ -25,17 +25,11 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const lastname = this.teacherForm.get('lastname').value;
-    const firstname = this.teacherForm.get('firstname').value;
-    const statut = this.teacherForm.get('statut').value;
-    const description = this.teacherForm.get('description').value;
-
-    if (!lastname || !firstname || !statut || !description) {
+    const form = this.teacherForm.value;
+    if (!form ||!form.lastname || !form.firstname || !form.statut || !form.description) {
       alert('Vous n\'avez pas remplis tous les champs');
       return;
     }
-
-    const form = this.teacherForm.value;
     this.teacher.emit(form);
     this.teacherForm.reset();
   }
