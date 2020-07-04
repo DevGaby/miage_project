@@ -10,33 +10,26 @@ import { ProfService } from '../services/prof.service';
 })
 export class ProfComponent implements OnInit {
   myProfs: Professeur[] = [];
-  showBtnInit: boolean;
-  showBtnDelete:boolean;
-  
-  //test @Input
-  addActive: boolean;
+  sizeMyProfsInitial: number;
+  isModalDisplayed: boolean;
   constructor(private profService: ProfService) { }
 
   ngOnInit(): void {
-    this.showBtnInit = false;
-    this.showBtnDelete = true;
     this.getProfs();
   }
 
   getProfs(): void{
     this.myProfs = this.profService.getProfs();
+    this.sizeMyProfsInitial = this.myProfs.length;
   }
 
   deleteProfs(): void {
     this.myProfs = this.profService.deleteProfs();
-    this.showBtnInit = true;
-    this.showBtnDelete = false;
   }
 
   deleteProf(profId: number): void {
     const currentList = this.myProfs.slice(0, this.myProfs.length);
-    this.myProfs = this.profService.deleteProfId(currentList, profId);
-    this.showBtnInit = true;
+    this.myProfs = this.profService.deleteProfById(currentList, profId);
   }
 
   reInitList(): void {
@@ -44,19 +37,22 @@ export class ProfComponent implements OnInit {
     currentList.slice(0, this.myProfs.length);
     currentList.map(c => new Professeur(c.id, c.firstname, c.lastname, c.statut, c.description));
     this.myProfs = currentList;
-    this.showBtnDelete = true;
-    this.showBtnInit = false;
   }
 
   addTeacher(){
-    this.addActive = true;
+    this.isModalDisplayed = true;
   }
 
-  updateList(event){
+  updateList(event: Professeur): void{
+    let newTeacher = new Professeur(event.id, event.firstname, event.lastname, event.statut, event.description);
     const currentList = this.myProfs.slice(0, this.myProfs.length);
     event.id = this.myProfs.length + 1;
-    currentList.push(event);
-    this.myProfs = currentList.map(p => new Professeur(p.id, p.firstname, p.lastname, p.statut, p.description));
-    this.addActive = false;
+    currentList.push(newTeacher);
+    this.myProfs = currentList.slice(0, currentList.length);
+    this.isModalDisplayed = false;
+  }
+
+  closeModal(event : boolean): void{
+    this.isModalDisplayed = event;
   }
 }

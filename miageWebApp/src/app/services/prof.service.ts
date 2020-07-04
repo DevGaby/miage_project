@@ -10,25 +10,21 @@ export class ProfService {
   constructor() { }
 
   getProfs(): Professeur[] {
-    rawProfs.map(p => new Professeur(p.id, p.lastname, p.firstname, p.statut, p.description));
-    return rawProfs;
+   return rawProfs.map(p => new Professeur(p.id, p.lastname, p.firstname, p.statut, p.description));
   }
 
   deleteProfs(): Professeur[] {
-    const emptyList = [];
-    return emptyList;
+    return [];
   }
 
-  deleteProfId(oldList: Professeur[], id: number): Professeur[] {
-    const idClass = oldList.findIndex(c => c.id === id);
-    const newList = [];
-    oldList.forEach((c, index) => {
-      if (idClass !== index) {
-        const prof: Professeur = new Professeur(c.id, c.lastname, c.firstname, c.statut, c.description);
-        newList.push(prof);
-      }
-    });
-    return newList;
+  deleteProfById(oldList: Professeur[], id: number): Professeur[] {
+    const idTeacher = oldList.findIndex(c => c.id === id);
+    if(idTeacher !== -1){
+      oldList.splice(idTeacher, 1);
+      return oldList;
+    }else {
+      console.log('error id')
+    }
   }
 
   postTeacher(oldList: Professeur[], newTeacher: any): Professeur[] {
